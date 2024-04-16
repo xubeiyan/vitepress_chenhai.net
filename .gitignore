@@ -1,0 +1,5 @@
+# 默认生成个模板居然没有.gitignore，你们能不能不要这么懒
+# Vitepress 1.1的文档上写的是将.vitepress/cache加入到gitignore，Evan You（看我手势🖕
+docs/.vitepress/cache
+dist
+node_modules
