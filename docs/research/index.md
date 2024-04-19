@@ -20,6 +20,8 @@ next: false
 
 * [V2Ray Config Generator](https://chenhai.net/tools/v2r-config-gen/)
 
+* [Shiro Pad](https://shiropad.mea.moe/)
+
 ## Games {#games}
 
 * [Infinite Runner](https://chenhai.net/games/infiniterunner/)
