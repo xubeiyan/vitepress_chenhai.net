@@ -9,10 +9,13 @@ hero:
   actions:
     - theme: brand
       text: About us
-      link: /about
+      link: /about/
     - theme: alt
       text: Tools
-      link: /research#tools
+      link: /research/#tools
+    - theme: alt
+      text: Blogs
+      link: /blog/
 
 # features:
 #   - title: Feature A
