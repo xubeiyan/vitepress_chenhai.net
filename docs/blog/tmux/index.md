@@ -18,6 +18,8 @@ outline: deep
 
 首先我们需要安装 `tmux`，可以参考其 [GitHub 的 wiki 页面](https://github.com/tmux/tmux/wiki/Installing)
 
+> 但很多 `Linux` 发行版的包管理里面的版本都非常老了，比如我的VPS上的 `Ubuntu 18.04`，带的是`v2.6`，截至本教程的更新时间（20240612）时，`tmux` 版本为 `v3.4`。导致你不得不用手动安装的方式
+
 #### 使用包管理
 
 还是使用包管理比较简单
@@ -112,6 +114,7 @@ bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
+# 增加新建窗格时跟随原有目录的功能（比较实用）
 bind '"' split-window -v -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 ```
