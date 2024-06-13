@@ -16,9 +16,9 @@ outline: deep
 
 ### 1. 安装 tmux
 
-首先我们需要安装 `tmux`，可以参考其 [GitHub 的 wiki 页面](https://github.com/tmux/tmux/wiki/Installing)
+首先我们需要安装 `tmux`，版本需要在 `v3.3` 之上。可以参考其 [GitHub 的 wiki 页面](https://github.com/tmux/tmux/wiki/Installing)
 
-> 但很多 `Linux` 发行版的包管理里面的版本都非常老了，比如我的VPS上的 `Ubuntu 18.04`，带的是`v2.6`，截至本教程的更新时间（20240612）时，`tmux` 版本为 `v3.4`。导致你不得不用手动安装的方式
+> 但很多 `Linux` 发行版的包管理里面的版本都非常老了，比如我的VPS上的 `Ubuntu 18.04`，其 `apt` 仓库自带的是`v2.6`，截至本教程的更新时间（20240612）时，`tmux` 最新版本为 `v3.4`。导致你不得不用手动安装的方式
 
 #### 使用包管理
 
@@ -38,7 +38,15 @@ outline: deep
 
 参考 wiki 页面，略微有些复杂，不熟悉 make 那一套建议不要尝试
 
-### 2. 配置文件
+### 2. 安装 `tpm` (Tmux Plugin Manager)
+
+这步需要从 `GitHub` 上克隆一个 `tpm` 项目，下面的示例代码存储位置为 `~/.tmux/plugins/tpm`，记住这个位置下面会用到
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+### 3. 配置文件
 
 配置文件放置于特定位置，推荐放置文件夹 `~/.tmux.conf` 或者 `~/.config/tmux/tmux.conf`, 记住此位置下面会用到
 
@@ -48,7 +56,7 @@ outline: deep
 touch ~/.tmux.conf
 ```
 
-编辑这个配置文件，这里使用 `vim`
+编辑这个配置文件，这里使用 `vim`，大约会使用这几个命令: `i` 变为插入模式，用于粘贴代码，`<Esc>:wq`回到一般模式，保存退出 `vim`，详细用法请查看相关帮助
 
 ```bash
 vim ~/.tmux.conf
@@ -105,6 +113,7 @@ set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'dreamsofcode-io/catppuccin-tmux'
 set -g @plugin 'tmux-plugins/tmux-yank'
 
+# 同2. 里面的路径
 run '~/.tmux/plugins/tpm/tpm'
 
 # 使用vi模式
@@ -122,9 +131,9 @@ bind % split-window -h -c "#{pane_current_path}"
 
 保存退出后，如在 `tmux` 中，使用 `tmux source ~/.tmux.conf`（这个位置可以根据前面设置的更改） 重新加载此文件
 
-### 3. 执行插件安装
+### 4. 执行插件安装
 
-重新加载此文件后，需要再按 `Ctrl+b Shift+i` 来让 `tmux` 安装这些插件，才能获得样式更改，至此调整结束
+重新加载此文件后，需要再按 `Ctrl+b Shift+i` 来让 `tmux` 安装这些插件，待屏幕显示 `TMUX environment reloaded. Done, press ENTER to continue` 时，按 `Enter` 键继续，插件即安装完成
 
 ## 总结
 
@@ -134,4 +143,4 @@ bind % split-window -h -c "#{pane_current_path}"
 * 传统终端内启动的进程会随着终端的关闭而结束，而 `tmux` 不会，于是可以启动各种进程，无需担心终端关闭而停止进程
 * 传统终端生态丰富程度远远不及 `tmux`, 后者也并不是重新实现终端，而且可以实现多人操控同一个终端
 
-翻译了一个[Tmux速查表](https://chenhai.net/tools/tmux-cheat-sheet-cn/)，欢迎食用和提出建议
+翻译了一个[Tmux速查表](https://chenhai.net/tools/tmux-cheat-sheet-cn/)，欢迎使用和提出建议
