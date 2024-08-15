@@ -40,6 +40,9 @@ next: false
 
 * [Wordle](https://chenhai.net/games/wordle/)
 
+* [TicTacToePlus](https://chenhai.net/games/tictactoeplus/)
+    > 井字棋增强版，可以联机
+
 ## Front-end Playground {#frontendplayground}
 
 * [Clock Canvas](https://chenhai.net/front-end-playground/clock/)

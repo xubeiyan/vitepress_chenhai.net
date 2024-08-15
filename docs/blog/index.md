@@ -16,6 +16,6 @@ next: false
 
 > [neovim](https://neovim.io/) 是 [vim](https://www.vim.org/) 的替代品（什么你用 `Emacs`，那还是不用往下看了）
 
-* [neovim 配置教程(建设中)](/blog/neovim_config/index.md)
+* [neovim 配置教程](/blog/neovim_config/index.md)
 
 
