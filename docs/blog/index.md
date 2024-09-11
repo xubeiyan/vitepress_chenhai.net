@@ -18,4 +18,9 @@ next: false
 
 * [neovim 配置教程](/blog/neovim_config/index.md)
 
+## Git
+
+> 撰写中
+* [Git rebase的两个常用场景](/blog/git/git_rebase_common_usage/index.md)
+
 
