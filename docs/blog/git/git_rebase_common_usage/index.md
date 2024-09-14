@@ -59,7 +59,9 @@ git reset HEAD~1
 git rebase dev
 ```
 
-它代表了会把当前分支（即`git status`显示的分支）的内容`rebase`到`dev`分支上，即会把如果你的提交和`dev`分支上没有冲突的话，那就可以很轻松的完成。下面是一个简单的例子：
+它代表了会把当前分支（即`git status`显示的分支）的内容`rebase`到`dev`分支上，这一步分为两种情况，一种无需解决冲突，即如果你的提交和`dev`分支上没有冲突的话，那就可以很轻松的完成。另一种需要解决冲突，点击 [跳转至解决冲突](#conflict) 一节。
+
+#### 无需解决冲突
 
 ```shell
 # rebase前
@@ -82,6 +84,101 @@ $ git log --all --oneline --graph
 它的好处我们在上图也可以看出来，完全没有`merge`提交，提交历史清晰，向远端提交也没有任何压力，直接`git push origin HEAD:dev`即可，因为前面的内容完全一致，远端只需执行`Fast-Forward`合并即可。
 
 同时也可以看出，这个`rebase`命令是会删除老的在`feature\new`分支上的`SHA`为`4717a58`的提交，再在`dev`分支上`SHA`为`6355958`这次提交后追加一个新的`aa98dad`的新提交的，虽然内容完全一样，但它已经是一个新提交了。
+
+#### 需要解决冲突 {#conflict}
+
+如果`Git`不能决定如何快进，就需要自己手动解决冲突。这和`merge`时遇到的冲突需要合并是一样的。
+
+假设`rebase`之前代码是这样的，分为`feature/new`分支和`dev`分支
+
+```shell
+# rebase前
+$ git log --all --oneline --graph
+* 6e03fd3 (HEAD -> feature/new, origin/feature/new) change to 2
+| * fa4959a (origin/dev, origin/HEAD, dev) modify code.txt
+|/
+* 76e43f7 add code.txt
+```
+
+但使用`git rebase`时并不能直接完成，而是提示冲突。
+
+```shell
+$ git rebase dev
+Auto-merging code.txt
+CONFLICT (content): Merge conflict in code.txt
+error: could not apply 6e03fd3... change to 2
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+hint: Disable this message with "git config advice.mergeConflict false"
+Could not apply 6e03fd3... change to 2
+```
+
+这时候打开`code.txt`，就会发现他的内容变成了
+
+```
+first commit
+
+<<<<<<< HEAD
+this content will be 1
+
+// no comment
+=======
+this content will be 2
+>>>>>>> 6e03fd3 (change to 2)
+```
+我们想调整的是把`1`变为`2`，然后保留`// no comment`这一行，则直接编辑变成这样，保存。所有有冲突的文件都会被处理成这样的格式。
+
+```
+first commit
+
+this content will be 2
+
+// no comment
+```
+
+然后在命令行`git add`修改的文件。
+```shell
+$ git add code.txt
+```
+或者添加所有修改后的冲突
+```shell
+$ git add .
+```
+
+然后执行`git rebase --continue`，会添加一个解决冲突的提交，写上你的解决提交内容。保存即可。再看一下提交日志：
+```shell
+$ git log --oneline --all --graph
+* 781e3cc (HEAD -> feature/new) change to 2
+* fa4959a (origin/dev, origin/HEAD, dev) modify code.txt
+| * 6e03fd3 (origin/feature/new) change to 2
+|/
+* 76e43f7 add code.txt
+```
+
+可以看出新增了`781e3cc`这个提交，成功地将`6e03fd3`重新变换了 base 提交。
+
+接下来同样地，提交到远端即可。
+```shell
+$ git push origin HEAD:dev
+
+# 再次查看提交历史
+$ git log --oneline --all --graph
+* 781e3cc (HEAD -> feature/new, origin/dev, origin/HEAD) change to 2
+* fa4959a (dev) modify code.txt
+| * 6e03fd3 (origin/feature/new) change to 2
+|/
+* 76e43f7 add code.txt
+```
+
+至于这个多余的`origin/feature/new`在确认合并没有问题之后可以删除。
+
+```shell
+$ git push origin --delete feature/new
+```
+
+至此，通过`rebase`重排提交，且出现冲突的例子解释完毕。但有些特殊情况。
 
 > 但有些开发环境的合并分支并不能直接使用`merge`，而是使用`Pull Request`，这种情况就不适用这个方案，因为这种情况下`dev`分支极有可能是不允许直接`merge`的，所以最后的`git push origin HEAD:dev`并不能执行成功
 
