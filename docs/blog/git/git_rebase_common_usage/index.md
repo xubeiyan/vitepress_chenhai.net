@@ -138,16 +138,10 @@ this content will be 2
 // no comment
 ```
 
-然后在命令行`git add`修改的文件。
-```shell
-$ git add code.txt
-```
-或者添加所有修改后的冲突
-```shell
-$ git add .
-```
+然后在命令行`git add`修改的文件。可以使用`git add code.txt`添加完成了手动合并操作的文件，或者使用`git add .`添加所有修改后的冲突文件。
 
-然后执行`git rebase --continue`，会添加一个解决冲突的提交，写上你的解决提交内容。保存即可。再看一下提交日志：
+
+然后执行`git rebase --continue`，会添加一个解决冲突的提交，写上你的解决提交内容，我个人是强烈建议写上`rebase`字样，以便以后查找修改，撰写完毕保存即可。再看一下提交日志：
 ```shell
 $ git log --oneline --all --graph
 * 781e3cc (HEAD -> feature/new) change to 2
