@@ -9,7 +9,7 @@ outline: deep
 * 多人开发中避免不必要的`merge`操作
 * 修改自己的提交历史
 
-由于各种Git GUI工具五花八门，所讲述的功能不一定所有的GUI都支持，所以这里就以`CLI`（命令行接口）为例子来讲述。
+由于各种Git GUI工具五花八门，所讲述的功能不一定所有的GUI都支持，所以这里就以`CLI`（命令行接口）为例子来讲述，理解了命令行图形界面就简单很多。
 
 ## 避免不必要的`merge`
 
@@ -128,7 +128,7 @@ this content will be 1
 this content will be 2
 >>>>>>> 6e03fd3 (change to 2)
 ```
-我们想调整的是把`1`变为`2`，然后保留`// no comment`这一行，则直接编辑变成这样，保存。所有有冲突的文件都会被处理成这样的格式。
+我们想调整的是把`1`变为`2`，然后保留`// no comment`这一行，则直接编辑变成这样，保存。所有有冲突的文件都会被处理成这样的格式，我们需要一一修改，改漏了也不用担心，`git status`随时可以查看哪些文件尚未解决冲突。
 
 ```
 first commit
@@ -142,6 +142,7 @@ this content will be 2
 
 
 然后执行`git rebase --continue`，会添加一个解决冲突的提交，写上你的解决提交内容，我个人是强烈建议写上`rebase`字样，以便以后查找修改，撰写完毕保存即可。再看一下提交日志：
+
 ```shell
 $ git log --oneline --all --graph
 * 781e3cc (HEAD -> feature/new) change to 2
@@ -153,7 +154,7 @@ $ git log --oneline --all --graph
 
 可以看出新增了`781e3cc`这个提交，成功地将`6e03fd3`重新变换了 base 提交。
 
-接下来同样地，提交到远端即可。
+接下来同样地，将当前的分支（`feature/new`或者说`HEAD`）提交到远端`dev`即可。
 ```shell
 $ git push origin HEAD:dev
 
@@ -183,8 +184,3 @@ $ git push origin --delete feature/new
 答案就在这个`git pull`上面，一般我们在准备要合并自己的分支到`dev`时，会习惯性的执行`git pull`，这个命令相当于两个命令的结合`git fetch`和`git merge`(仅限老版本的`Git`，默认`pull`是基于`merge`，新版本的`Git`安装式会询问`pull`是基于`rebase`还是`merge`)，它会拉取远端分支上的内容，将其merge到本地分支中，所以这次`merge`提交是由`pull`请求生成的。
 
 但新版的`Git`已经意识到这个问题，开始将`pull`的合并策略改为可调整的，如果用`rebase`的话就可以减少很多麻烦的工作。
-
-## 调整你的`commit`历史
-
-有时候我们需要修改你的提交，分出新的，合并多个，调换顺序，移除某些，这些功能依然可以使用`rebase`完成。
-
