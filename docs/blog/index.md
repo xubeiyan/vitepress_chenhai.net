@@ -21,6 +21,7 @@ next: false
 ## Git
 
 > 撰写中
-* [Git rebase的两个常用场景](/blog/git/git_rebase_common_usage/index.md)
+* [Git rebase的两个常用场景(一)](/blog/git/git_rebase_common_usage/index.md)
+* [Git rebase的两个常用场景(二)](/blog/git/git_rebase_common_usage_2/index.md)
 
 
