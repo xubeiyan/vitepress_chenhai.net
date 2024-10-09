@@ -35,7 +35,7 @@ $ git log --graph
 
 ## 修改提交历史
 
-我们以修改`a748e80`这个提交的`a.txt`的内容，并把提交消息修改得更正式一点。例如`fix(a.txt): add one line and another line`，顺便把作者改成`2<2@1.cn>`
+我们以修改`a748e80`这个提交的`a.txt`的内容，并把提交消息修改得更正式一点。例如`fix(a.txt): add one line and another line`，顺便把作者改成`2<2@1.cn>`为例子讲述
 
 首先使用`git rebase -i`这个命令，`-i`表示使用交互式操作。我们如果要修改`a748e80`这个提交，则需要输入它之前的那个提交，例如`git rebase -i d51aa2a`或者`git rebase -i a748e80~1`，会进入这个修改界面（其实是`vim`编辑某个文件）
 
@@ -55,7 +55,7 @@ pick c24b828 add b.txt
 # ...
 ```
 
-按`:wq`保存并退出，就可以看到这样的输出：
+保存并退出，就可以看到这样的输出：
 
 ```
 Stopped at a748e80...  modify a.txt
@@ -92,7 +92,7 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-我们需要先把刚才对`a.txt`的修改增加到暂存区，即使用`git add -A`，然后使用`git commit --amend`来修改当前`a748e80`这次提交的提交消息，如果要修改提交作者和邮箱则需要加入`--author="2<2@1.cn>"`。
+可以看出此时暂存区里现象还有修改后的`a.txt`，我们需要先把刚才对`a.txt`的修改增加到这次提交中，即使用`git add -A`，然后使用`git commit --amend`来修改当前`a748e80`这次提交的提交消息，如果要修改提交作者和邮箱则需要加入`--author="2<2@1.cn>"`。
 ```shell
 $ git commit --amend --author="2 <2@1.cn>"
 ```
@@ -110,7 +110,7 @@ fix(a.txt): add one line and another line
  1 file changed, 1 insertion(+)
 ```
 
-这个命令可以执行多次，修改至你满意为止。觉得可以继续了则执行`git rebase --contine`，会跳转到下一个需要操作的地方，由于我们的这里没有修改，则输出了变基完成的消息
+这个命令可以执行多次，修改至你满意为止。觉得可以继续了则执行`git rebase --continue`，会跳转到下一个需要操作的地方，由于我们的这里没有修改，则输出了变基完成的消息
 
 ```
 Successfully rebased and updated refs/heads/dev.
@@ -140,13 +140,13 @@ $ git log --graph
       add 1.txt
 ```
 
-这就是修改提交历史的方法，下面讲述压缩提交的例子
+这就是修改提交历史的方法，下面讲述压缩提交的例子。
 
 ## 压缩提交
 
-通常我们在自己本地开发的时候，是尽量提交越多越好，但如果要合并到开发分支时，则尽量压缩成一个提交，这依然可以使用`rebase`来完成
+通常我们在自己本地开发的时候，是尽量提交越多越好，但如果要合并到开发分支时，则尽量压缩成一个提交，这依然可以使用`rebase`来完成。
 
-假设有这样的一个`git`项目，执行`git log --oneline --graph`后输出如下
+假设有这样的一个`git`项目，执行`git log --oneline --graph`后输出如下：
 
 ```txt
 * 20b9f90 (HEAD -> dev) add comment
@@ -158,7 +158,7 @@ $ git log --graph
 
 因为最终要提交到远端，所以想要将`21c71b3`,`e68c383`,`4b0664b`和`20b9f90`压缩成一个提交，则使用`rebase`来完成。注意`rebase`只能用来修改当前***未提交到远端***的提交消息，例如上面的日志中从`21c71b3`到`4b0664b`的提交。
 
-使用`git rebase -i 4b0664b~1`来对`4b0664b`开始的（包括此提交）进行变基，执行命令后打开编辑界面（其实是`vim`)
+使用`git rebase -i 4b0664b~1`来对`4b0664b`开始的（包括此提交）进行变基，执行命令后打开编辑界面（其实是`vim`)。
 
 ```txt
 pick 4b0664b feature(1.txt): add feature 1
@@ -170,7 +170,8 @@ pick 20b9f90 add comment
 ...
 ```
 
-要删除和合并提交需要使用两个关键字`squash`和`fixup`
+要删除和合并提交需要使用两个关键字`squash`和`fixup`。
+
 * **`squash`** 用于将提交消息合并到前一个提交
 * **`fixup`** 则只保留文件修改，忽视掉提交消息
 
@@ -229,3 +230,94 @@ Successfully rebased and updated refs/heads/dev.
 ```
 
 这样就可以`git push origin`提交到远端了，别人协作时只会看到你的这一条提交，可以和之前的`rebase`变换自己的提交的基础提交的操作结合，得到干净清晰的提交历史。
+
+## 拆分提交
+
+拆分提交属于上面情况的逆向操作，这属于比较少见的需求了，但`Git`仍然提供了这个功能的实现。
+
+来看例子，假设我们有这样的提交历史，由`git log --oneline --graph`生成
+
+```
+* ceb1a59 (HEAD -> master) add 2.txt
+* f277ed7 add first line and second line
+* 69dbfcc add 1.txtt
+```
+
+其中`f277ed7`这个提交，修改的文件`1.txt`如下：
+
+```
+first line
+second line
+```
+
+如果我想把这个`f277ed7`拆分为两个提交，提交消息分别为`add first line`和`add second line`，该怎么做呢？当然也是使用`git rebase`。
+
+> [!WARNING]
+> 这个操作只能修改 ***未提交到远端*** 的提交，如果提交到了远端且在多人合作，不要进行这种操作。
+
+### 
+
+回到`69dbfcc`这个提交或者说`f277ed7`的前一个提交
+
+```bash
+git rebase -i 69dbfcc
+```
+
+或者
+
+```bash
+git rebase -i f277ed7~
+```
+
+执行了命令之后，会打开一个编辑对话框，它的前几行类似如下，注意旧的提交是在前面的：
+
+```
+pick f277ed7 add first line and second line
+pick ceb1a59 add 2.txt
+
+...
+```
+
+我们需要拆分`f277ed7`这个提交，就把它前面的`pick`修改为`edit`，并保存退出，注意此时并不需要直接修改文件，而是撤销当前提交的修改，执行如下命令
+
+```
+git reset HEAD~
+```
+
+注意`reset`在这里默认是混合模式，即删除提交消息，而保留文件修改，所以此时的`1.txt`的内容仍是
+
+```
+first line
+second line
+```
+
+而`git log --online --graph`的结果已是
+
+```
+* 69dbfcc (HEAD) add 1.txt
+```
+
+我们只需将`1.txt`修改成只有第一行的样子，再`git commit -a`，在打开的消息提交框中输入第一次的提交消息`add first line`，然后继续修改`1.txt`修改为原来有两行的样子，并再次`git commit -a`，在进行下一步前，建议使用`git log --oneline --graph`查看一下提交日志
+
+```
+* 71d9049 (HEAD) add second line
+* e4b7564 add first line
+* 69dbfcc add 1.txt
+```
+
+是我们想要的样子，接着只需`git rebase --continue`即可继续`rebase`，由于已经没有需要操作的，所以提示成功：
+
+```
+Successfully rebased and updated refs/heads/master.
+```
+
+然后再`git log --oneline --graph`看一下提交日志：
+
+```
+* 44d4e85 (HEAD -> dev) add 2.txt   // [!code warning]
+* 71d9049 add second line   // [!code ++]
+* e4b7564 add first line    // [!code ++]
+* 69dbfcc add 1.txt
+```
+
+可以清楚地看到，原来的`f277ed7`提交已经被拆分为了`e4b7564`和`71d9049`两个提交，而之后的提交的`SHA`都发生了改变。
