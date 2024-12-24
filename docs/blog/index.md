@@ -25,3 +25,8 @@ next: false
 * [Git rebase 的两个常用场景(二)](/blog/git/git_rebase_common_usage_2/index.md)
 
 
+## JavaScript
+
+> 一些简单的 `JavaScript` 文章翻译
+* [JavaScript 的 ??= 运算符：让取默认值更简单](/blog/javascript/javascript-nullish-coalescing-assignment-operator.md)
+
