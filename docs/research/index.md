@@ -32,6 +32,9 @@ next: false
 - [Shiro Pad](https://shiropad.mea.moe/)
   > 类似 `Pastebin` 的短代码粘贴网站，允许设置长度从阅后即焚到一周的可见时间
 
+- [匿名版](https://nimingban.chenhai.net/)
+  > 类似于 `2ch`，`4chan` 和 `A岛` 等匿名论坛的讨论版，采用了现代 UI
+
 ## Games {#games}
 
 - [Infinite Runner](https://chenhai.net/games/infiniterunner/)
