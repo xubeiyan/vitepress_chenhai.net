@@ -30,3 +30,8 @@ next: false
 > 一些简单的 `JavaScript` 文章翻译
 * [JavaScript 的 ??= 运算符：让取默认值更简单](/blog/javascript/javascript-nullish-coalescing-assignment-operator.md)
 
+## NAS
+
+> 记录一些搭建 `NAS` 遇到的问题
+
+* [使用 Aria2 和 Frp 打造远程下载](/blog/nas/remote-download-with-aria2-and-frp/index.md)

@@ -13,6 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vitepress": "^1.1.0"
+    "vitepress": "^1.6.3"
+  },
+  "dependencies": {
+    "@gerhobbelt/markdown-it-samp": "0.0.4-1",
+    "markdown-it-kbd": "^2.2.2"
   }
 }
