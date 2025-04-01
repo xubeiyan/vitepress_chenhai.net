@@ -34,4 +34,4 @@ next: false
 
 > 记录一些搭建 `NAS` 遇到的问题
 
-* [使用 Aria2 和 Frp 打造远程下载](/blog/nas/remote-download-with-aria2-and-frp/index.md)
+* [(in Dev)使用 Aria2 和 Frp 打造远程下载](/blog/nas/remote-download-with-aria2-and-frp/index.md)

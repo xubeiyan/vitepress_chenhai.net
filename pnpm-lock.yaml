@@ -7,13 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@gerhobbelt/markdown-it-samp':
-        specifier: 0.0.4-1
-        version: 0.0.4-1
-      markdown-it-kbd:
-        specifier: ^2.2.2
-        version: 2.2.2
     devDependencies:
       vitepress:
         specifier: ^1.6.3
@@ -270,9 +263,6 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
-
-  '@gerhobbelt/markdown-it-samp@0.0.4-1':
-    resolution: {integrity: sha512-avJQvE0BcjRmIh3wtpBin5kMEQavRaCts9tp5BCdGlOrtKnqQpfrTwAWM00tPvMuapYkGFafapi9r07On2ksIg==}
 
   '@iconify-json/simple-icons@1.2.25':
     resolution: {integrity: sha512-2E1/gOCO97rF6usfhhiXxwzCb+UhdEsxW3lW1Sew+xZY0COY6dp82Z/r1rUt2fWKneWjuoGcNeJHHXQyG8mIuw==}
@@ -611,10 +601,6 @@ packages:
 
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
-
-  markdown-it-kbd@2.2.2:
-    resolution: {integrity: sha512-J5qVHtLuxh1HTJcl5xhopiFpf6fnHIBY0OO1akGHf2KW0VwQLYhsip/bkiTJFoEZqhssxQuUBY1LO5/SbCrB6g==}
-    engines: {node: '>=6.0.0'}
 
   mdast-util-to-hast@13.2.0:
     resolution: {integrity: sha512-QGYKEuUsYT9ykKBCMOEDLsU5JRObWQusAolFMeko/tYPufNkRffBAQjIE+99jbA87xv6FgmjLtwjh9wBWajwAA==}
@@ -999,8 +985,6 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@gerhobbelt/markdown-it-samp@0.0.4-1': {}
-
   '@iconify-json/simple-icons@1.2.25':
     dependencies:
       '@iconify/types': 2.0.0
@@ -1341,8 +1325,6 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   mark.js@8.11.1: {}
-
-  markdown-it-kbd@2.2.2: {}
 
   mdast-util-to-hast@13.2.0:
     dependencies:

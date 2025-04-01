@@ -1,8 +1,5 @@
 import { defineConfig } from "vitepress";
 
-import kbd from "markdown-it-kbd";
-import samp from "@gerhobbelt/markdown-it-samp";
-
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: "/",
@@ -39,11 +36,5 @@ export default defineConfig({
     ],
 
     socialLinks: [{ icon: "github", link: "https://github.com/xubeiyan" }],
-  },
-  markdown: {
-    config: (md) => {
-      md.use(kbd);
-      md.use(samp);
-    },
-  },
+  }
 });
