@@ -6,7 +6,7 @@ import samp from "@gerhobbelt/markdown-it-samp";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: "/",
-  head: [["link", { rel: "icon", href: "/icons/university.svg" }]],
+  head: [["link", { rel: "icon", href: "/icons/constellation.svg" }]],
   // cleanUrls: true,
   appearance: "dark",
   outDir: "../dist",
