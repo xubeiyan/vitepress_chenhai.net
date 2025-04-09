@@ -168,13 +168,19 @@ bt-save-metadata=true
 
 3. 在你的服务器上安装和配置好 webui-aria2
 
+> GitHub 仓库地址为 [https://github.com/ziahamza/webui-aria2](https://github.com/ziahamza/webui-aria2)
+
+需要安装 `nodejs`
+
+> 下载地址位于 [https://nodejs.org/zh-cn/download](https://nodejs.org/zh-cn/download)
+
 4. 在你的服务器上安装和配置好 frp 服务端
 
 ## 贴近生产环境
 
-如果你不想某次重启 NAS 或者服务器之后给人演示的时候发现装X失败，就应该让整个架构足够健壮。下面是一些必要的步骤
+如果你不想某次重启 NAS 或者服务器之后给人演示的时候发现装 X 失败，就应该让整个架构足够健壮。下面是一些必要的步骤
 
-1. aria2 在 NAS 上自动启动
+### aria2 在 NAS 上自动启动
 
 以我的 Windows Server 2020 为例，下面是 Windows 系统的启动流程
 
@@ -188,6 +194,17 @@ bt-save-metadata=true
 
 将 aria2 设为自启动，常见方法是把下面的 `cmd` 文件添加到“启动”目录。还是以 Windows 系统为例:
 
-  * 按 [[Win]] + [[R]]
+1. 按 `Win` + `R` 打开运行窗口，键入 `shell:startup` 打开启动文件夹
 
-2. 让
+2. 新建 `aria2.cmd` 文件，写入以下内容（假设 `aria2.exe` 在 `D:\aria2`）
+
+```
+D:
+cd D:\aria2
+start aria2.exe --conf aria2.conf
+```
+3. 保存退出，然后计算机则会在下一次登入系统后启动 `aria2`
+
+### frp 在 NAS 上自启动
+
+### frp 在服务器上自启动
