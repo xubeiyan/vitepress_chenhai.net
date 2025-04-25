@@ -27,6 +27,9 @@ next: false
 - [V2Ray Config Generator](https://chenhai.net/tools/v2r-config-gen/)
   > 将 V2Ray/XRay 的配置文件转换为方便移动设备读取的 QRCode
 
+- [SubRip Subtitle Sort](https://chenhai.net/tools/subrip_subtitle_sort/)
+  > 解决当 VLC 等播放器不能识别乱序排列字幕的 SubRip 文件(.srt) 的问题
+
 ## Websites {#websites}
 
 - [Shiro Pad](https://shiropad.mea.moe/)
