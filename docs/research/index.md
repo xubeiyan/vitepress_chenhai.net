@@ -62,3 +62,5 @@ next: false
 - [Landscape Switch](https://chenhai.net/front-end-playground/landscape-switch/)
 
 - [Random String Generate Algorithm](https://chenhai.net/front-end-playground/cookieStringGenerator/)
+
+- [Matrix Digital Rain](https://chenhai.net/front-end-playground/matrix-digital-rain/)

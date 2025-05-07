@@ -172,7 +172,7 @@ bt-save-metadata=true
 
 需要安装 `nodejs`
 
-> 下载地址位于 [https://nodejs.org/zh-cn/download](https://nodejs.org/zh-cn/download)
+> 下载地址位于 [https://nodejs.org/zh-cn](https://nodejs.org/zh-cn)
 
 4. 在你的服务器上安装和配置好 frp 服务端
 
