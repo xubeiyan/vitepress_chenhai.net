@@ -34,6 +34,10 @@ outline: deep
 | macOS (using MacPorts)    | `port install tmux`   |
 | openSUSE                  | `zypper install tmux` |
 
+#### （或者）预打包程序（2026.04.10 新增）
+
+在这个 [tmux-builds 仓库](https://github.com/tmux/tmux-builds/releases) 有打包好的，下载下来用即可
+
 #### （或者）手动安装
 
 参考 wiki 页面，略微有些复杂，不熟悉 make 那一套建议不要尝试
@@ -134,6 +138,8 @@ bind % split-window -h -c "#{pane_current_path}"
 ### 4. 执行插件安装
 
 重新加载此文件后，需要再按 `Ctrl+b Shift+i` 来让 `tmux` 安装这些插件，待屏幕显示 `TMUX environment reloaded. Done, press ENTER to continue` 时，按 `Enter` 键继续，插件即安装完成
+
+然后只需退出当前 `tmux`（`Ctrl+b d`），再重新进入即可（`tmux a`）
 
 ## 总结
 
